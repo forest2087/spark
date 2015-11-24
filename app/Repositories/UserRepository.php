@@ -38,7 +38,8 @@ class UserRepository implements Contract
      */
     public function createUserFromRegistrationRequest(Request $request, $withSubscription = false)
     {
-        return DB::transaction(function () use ($request, $withSubscription) {
+        //removed transaction in order for MongoDB to work
+        //return DB::transaction(function () use ($request, $withSubscription) {
             $user = $this->createNewUser($request, $withSubscription);
 
             if ($withSubscription) {
@@ -46,7 +47,7 @@ class UserRepository implements Contract
             }
 
             return $user;
-        });
+        //});
     }
 
     /**
